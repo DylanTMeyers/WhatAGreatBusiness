@@ -42,12 +42,6 @@ public class Financialbusinessprogram {
                 Locations.put(invStringArray[0] + invStringArray[2], 0.0);
             }
         }
-        while(hey.hasNextLine()){
-            if(hey.hasNext("CANDY")){
-                break;
-            }
-            productsOnFile.add(hey.nextLine());
-        }
         while(!quitOrNaw) {
             defContinue = true;
             System.out.println("                             ------------------------------");
@@ -57,11 +51,18 @@ public class Financialbusinessprogram {
             System.out.println("                                     Product List");
             System.out.println("                                     Creditor List");
             System.out.println("                                    Transaction list");
-            System.out.println("                                       Cred Add");
-            System.out.println("                                       Cred Sub");
-            System.out.println("                                        Reup");
-            System.out.println("                                        Sold");
+            System.out.println("                                      Creditor Add");
+            System.out.println("                                      Creditor Sub");
+            System.out.println("                                        Restock");
+            System.out.println("                                         Sold");
             System.out.println("                                       Consumed");
+            System.out.println("                                     Search Employee");
+            System.out.println("                                        Taxes");
+            System.out.println("                                     Add Employee");
+            System.out.println("                                   Show Current Week");
+            System.out.println("                                   Show Current Day");
+            System.out.println("                                   Show Current Month");
+            System.out.println("                                   Show Current Year");
             System.out.println("                                        Quit");
             System.out.println();
             System.out.println("                             ------------------------------");
@@ -255,81 +256,6 @@ public class Financialbusinessprogram {
                         System.out.println("how much did this product sell for?");
                         price = Double.parseDouble(stdn.nextLine());
                         theFinance.transaction(name,subNumber,price);
-                        for (int I = 0; I < investorProduct.size(); I++) {
-                            invStringArray = investorProduct.get(I).split(" ");
-                            if (invStringArray.length == 3) {
-                                if (name.toUpperCase().equals(invStringArray[2])) {
-                                    invNumber = Double.parseDouble(invStringArray[1]);
-                                    if (Locations.get(invStringArray[0] + invStringArray[2]) == 0) {
-                                        Locations.replace(invStringArray[0] + invStringArray[2], Product.toAnOunce(invNumber));
-                                    }
-                                    invNumber = invNumber - subNumber;
-
-                                    if (invNumber <= Locations.get(invStringArray[0] + invStringArray[2])) {
-                                        Locations.replace(invStringArray[0] + invStringArray[2], Product.toAnOunce(invNumber));
-                                        System.out.println(invStringArray[0] + " SOLD AN OUNCE OF " + invStringArray[2] + "!!!!!!!!!");
-                                        for(int i = 0; i <5; i++){
-                                            System.out.println("YAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-                                        }
-                                    }
-                                    for (int l = 0; l < investorProduct.size(); l++) {
-                                        invStringArray = investorProduct.get(I).split(" ");
-                                        if (name.toUpperCase().equals(invStringArray[2])) {
-                                            invNumber = Double.parseDouble(invStringArray[1]);
-                                            invNumber = invNumber - subNumber;
-                                            invNumber = Math.round(invNumber * 10.0) / 10.0;
-                                            invStringArray[1] = Double.toString(invNumber);
-                                            investorProduct.set(I, invStringArray[0] + " " + invStringArray[1] + " " + invStringArray[2]);
-                                            break;
-                                        }
-
-                                    }
-                                    if(invNumber<=0){
-                                        StringBuilder full;
-                                        for(int i = 0; i<productsOnFile.size();i++){
-                                            full = new StringBuilder();
-                                            justOne = productsOnFile.get(i).split("   ");;
-                                            for(int l = 0; l< productsOnFile.get(i).length();l++){
-                                                if(l+1<productsOnFile.get(i).length() && productsOnFile.get(i).charAt(l) == '/' && productsOnFile.get(i).charAt(l+1) == investorProduct.get(I).charAt(0) && justOne[0].toLowerCase().equals(name.toLowerCase())){
-                                                    String.valueOf(productsOnFile.get(i).charAt(l));
-                                                    l++;
-                                                }
-                                                else if(l+1<productsOnFile.get(i).length() && productsOnFile.get(i).charAt(l) == investorProduct.get(I).charAt(0) && productsOnFile.get(i).charAt(l+1) == '/'&& justOne[0].toLowerCase().equals(name.toLowerCase())){
-                                                    String.valueOf(productsOnFile.get(i).charAt(l));
-                                                    l++;
-                                                }
-                                                else if(productsOnFile.get(i).charAt(l) == investorProduct.get(I).charAt(0)&& justOne[0].toLowerCase().equals(name.toLowerCase())){
-                                                    String.valueOf(productsOnFile.get(i).charAt(l));
-                                                }
-                                                else{
-                                                    full.append(productsOnFile.get(i).charAt(l));
-                                                }
-                                            }
-                                            productsOnFile.set(i, full.toString());
-                                        }
-                                        investorProduct.remove(I);
-                                        for (int l = 0; l < investorProduct.size(); l++) {
-                                            invStringArray = investorProduct.get(l).split(" ");
-                                            if (name.toUpperCase().equals(invStringArray[2])) {
-
-                                                subNumber2 = invNumber;
-                                                invNumber = Double.parseDouble(invStringArray[1]);
-                                                invNumber = invNumber + subNumber2;
-                                                invNumber = Math.round(invNumber * 10.0) / 10.0;
-                                                invStringArray[1] = Double.toString(invNumber);
-                                                investorProduct.set(I, invStringArray[0] + " " + invStringArray[1] + " " + invStringArray[2]);
-                                                break;
-                                            }
-
-                                        }
-
-
-                                    }
-
-                                    break;
-                                }
-                            }
-                        }
                         for (int I = 0; I < productsOnFile.size(); I++) {
                             StringArray = productsOnFile.get(I).split("   ");
                             if (name.toUpperCase().equals(StringArray[0].toUpperCase())) {
@@ -386,13 +312,13 @@ public class Financialbusinessprogram {
                     double prodAmount = Double.parseDouble(stdn.nextLine());
                     theFinance.Consumed(prod,prodAmount);
                     for(int m = 0; productsOnFile.size()>m; m++){
-                        String[] smokedArray = productsOnFile.get(m).split("   ");
-                        if(prod.toLowerCase().equals(smokedArray[0].toLowerCase())) {
-                            double currentamount = Double.parseDouble(smokedArray[1]) - prodAmount;
-                            if (smokedArray.length == 2) {
-                                productsOnFile.set(m, smokedArray[0] + "   " + currentamount);
-                            } else if (smokedArray.length == 3) {
-                                productsOnFile.set(m, smokedArray[0] + "   " + currentamount + "   " + smokedArray[2]);
+                        String[] consumedArray = productsOnFile.get(m).split("   ");
+                        if(prod.toLowerCase().equals(consumedArray[0].toLowerCase())) {
+                            double currentamount = Double.parseDouble(consumedArray[1]) - prodAmount;
+                            if (consumedArray.length == 2) {
+                                productsOnFile.set(m, consumedArray[0] + "   " + currentamount);
+                            } else if (consumedArray.length == 3) {
+                                productsOnFile.set(m, consumedArray[0] + "   " + currentamount + "   " + consumedArray[2]);
                             }
                         }
                     }
@@ -400,8 +326,19 @@ public class Financialbusinessprogram {
                     for(String i: productsOnFile){
                         System.out.println(i);
                     }
+                    break;
+                case "Search Employee":
+
+                    break;
+                case "Taxes":
+
+                    break;
+                case "Add Employee":
+
+                    break;
             }
-        }
+            }
+
 
         cool = new PrintWriter(new FileWriter("investorsBusinessProduct.txt"));
         for (String s : investorProduct) {
