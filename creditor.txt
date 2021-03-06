@@ -1,0 +1,5 @@
+Chan 90.0
+eli 15
+Devin 85.0
+junior 60
+kai 10
