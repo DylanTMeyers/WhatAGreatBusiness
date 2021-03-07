@@ -76,11 +76,19 @@ public class Finance {
         out.close();
     }
     public void printList(){
+        String[] credArray;
+        if(creditors.size() == 0){
+            System.out.println("No creditors.");
+        }
         for(String credit: creditors) {
-            System.out.println(credit);
+            credArray  = credit.split(" ");
+            System.out.println(credArray[0] + " $" + credArray[1]);
         }
     }
     public void tranList(){
+        if(transaction.size() == 0){
+            System.out.println("No transactions");
+        }
         for(String tran: transaction){
             System.out.println(tran);
         }
@@ -98,14 +106,16 @@ public class Finance {
         nah.close();
     }
     public void transaction(String item, double prodQua,double cost){
-        transaction.add("Sold "+prodQua + " of " + item+ " for $"+ cost);
+        transaction.add("Sold "+prodQua + " orders of " + item+ " for $"+ cost);
+
 
     }public void tranReup(String item, double prodqua, double cost){
-        transaction.add("Bought " + prodqua + " of " + item + " for $" + cost);
+        transaction.add("Bought " + prodqua + " orders of " + item + " for $" + cost);
+
     }public void invPaidOff(String name, int amount){
 
-    }public void Consumed(String item, double amount){
-        transaction.add("Somebody consumed " + amount + " of " + item);
+    }public void depleted(String item, double amount){
+        transaction.add(amount + " of " + item + " was depleted within the store");
 
     }
 

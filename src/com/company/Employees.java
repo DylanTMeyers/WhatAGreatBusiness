@@ -1,7 +1,12 @@
 package com.company;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class Employees{
     int count;
@@ -27,9 +32,32 @@ public class Employees{
     public void delete(int a){
         track.remove(a);
         count--;
+    }public void writeAll() throws IOException {
+        FileWriter myWriter = new FileWriter("Employees.txt");
+        track.forEach((k, v) -> {
+            try {
+                myWriter.write(v.getID() + " " + v.getName() + " " + v.getHoursWorked() + " " + v.getHourlyPay() + " " + v.getStatus() + " " + v.getPosition());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        myWriter.close();
+
+    }
+    public void readAll() throws FileNotFoundException {
+        File myem = new File("Employees.txt");
+        Scanner EMP = new Scanner(myem);
+        while(EMP.hasNextLine()){
+            String[] product = EMP.nextLine().split(" ");
+            Employee employee = new Employee(Integer.parseInt(product[0]), product[1], Double.parseDouble(product[2]), Double.parseDouble(product[3]), product[4], product[5]);
+            track.put(product[1],employee);
+        }
     }
 
-    public Employee getemployee(String a){
+
+
+    public Employee getEmployee(String a){
         return track.get(a);
     }//end of method
+
 }

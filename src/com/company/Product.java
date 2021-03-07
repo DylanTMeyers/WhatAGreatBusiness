@@ -32,15 +32,6 @@ public class Product {
 
         return name + " "+ investorAmount+ " " + product.toUpperCase();
     }
-    public static double toAnOunce(double number) {
-        double lastOunce = 0;
-        for(int i = 0; i<number; i = i +28){
-            lastOunce = i;
-
-
-        }
-        return lastOunce;
-    }
     public  void close(){
         out.close();
     }
