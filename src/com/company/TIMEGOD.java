@@ -183,7 +183,7 @@ public class TIMEGOD {
             System.out.println(" ");
         }
         else{
-            System.out.println(" Date: " + this.year[bob].getDate());
+            System.out.println("  ");
             System.out.println(" nothing was done this day");
             System.out.println(" ");
         }
