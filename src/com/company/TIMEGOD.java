@@ -227,7 +227,7 @@ public class TIMEGOD {
 
         int today = today();//todays number in year
 
-        for(int i = 0; i < tom; i++){
+        for(int i = 0; i <= tom; i++){
             thatDayReport((today-tom)+i);
         }//end of for
 
