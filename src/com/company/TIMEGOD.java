@@ -197,12 +197,19 @@ public class TIMEGOD {
     //method to show year's stats
     public void yearReport(){
         for(int i = 0 ; i < 365; i++){
-            System.out.println(" ");
-            System.out.println(" Date: " + this.year[i].getDate());
-            System.out.println(" Sales: " + this.year[i].getSales());
-            System.out.println(" Profit: " + this.year[i].getProfit());
-            System.out.println(" Cost: " + this.year[i].getCost());
-            System.out.println(" ");
+            try {
+                System.out.println(" ");
+                System.out.println(" Date: " + this.year[i].getDate());
+                System.out.println(" Sales: " + this.year[i].getSales());
+                System.out.println(" Profit: " + this.year[i].getProfit());
+                System.out.println(" Cost: " + this.year[i].getCost());
+                System.out.println(" ");
+            }
+            catch(NullPointerException e){
+                System.out.println(" ");
+                System.out.println(" nothing done today, moving on");
+                System.out.println(" ");
+            }
         }//end of for
     }//end of yearReport
 
