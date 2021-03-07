@@ -68,7 +68,7 @@ public class Financialbusinessprogram {
                 totalOptions = 7;
             }
             switch (totalOptions) {
-                case 1 -> {
+                case 1:
                     for(int l = 0; l<7; l++){
                         System.out.println();
                     }
@@ -131,8 +131,8 @@ public class Financialbusinessprogram {
 
                             break;
                     }
-                }
-                case 2 -> {
+                break;
+                case 2:
                     for(int l = 0; l<7; l++){
                         System.out.println();
                     }
@@ -183,8 +183,8 @@ public class Financialbusinessprogram {
                             break;
                         }
                     }
-                }
-                case 3 -> {
+                    break;
+                case 3:
                     for(int l = 0; l<7; l++){
                         System.out.println();
                     }
@@ -193,7 +193,7 @@ public class Financialbusinessprogram {
                     System.out.println("1.    Restock");
                     System.out.println("2.    Item Sold");
                     System.out.println("3.    Item Quantity Depleted");
-                    System.out.println("4.    quit");
+                    System.out.println("4.    Quit");
                     try {
                         productOptions= stdn.nextInt();
                         stdn.nextLine();
@@ -278,6 +278,7 @@ public class Financialbusinessprogram {
                                 System.out.println("how much did this product sell for?");
                                 price = Double.parseDouble(stdn.nextLine());
                                 theFinance.transaction(name, subNumber, price);
+                                timegod.write(price,subNumber);
                                 for (int I = 0; I < productsOnFile.size(); I++) {
                                     StringArray = productsOnFile.get(I).split("   ");
                                     if (name.toUpperCase().equals(StringArray[0].toUpperCase())) {
@@ -359,8 +360,8 @@ public class Financialbusinessprogram {
                             break;
                     }
 
-                }
-                case 4 -> {
+                    break;
+                case 4:
                     for(int l = 0; l<7; l++){
                         System.out.println();
                     }
@@ -430,9 +431,10 @@ public class Financialbusinessprogram {
                             break;
                         case 5:
                             break;
-                    }
+
                 }
-                case 5 -> {
+                    break;
+                case 5:
                     for(int l = 0; l<7; l++){
                         System.out.println();
                     }
@@ -476,11 +478,12 @@ public class Financialbusinessprogram {
 
                             break;
                     }
-                }
-                case 6 -> {
+                break;
+                case 6:
                     quitOrNaw = true;
-                }
-                case 7 -> System.out.println("try again!");
+                break;
+                case 7:System.out.println("try again!");
+                break;
 
             }
 
