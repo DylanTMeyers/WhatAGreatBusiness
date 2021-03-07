@@ -154,7 +154,7 @@ public class Financialbusinessprogram {
                         System.out.println();
                     }
                     switch (creditorOptions) {
-                        case 1 -> {
+                        case 1:
                             System.out.println("THE CURRENT CRED LIST:");
                             theFinance.printList();
                             System.out.println("What is the name of the creditor?");
@@ -165,8 +165,8 @@ public class Financialbusinessprogram {
                             theFinance.fileSet();
                             System.out.println("THE NEW CRED LIST:");
                             theFinance.printList();
-                        }
-                        case 2 -> {
+                        break;
+                        case 2:
                             System.out.println("THE CURRENT CRED LIST:");
                             theFinance.printList();
                             System.out.println("What is the name of the creditor?");
@@ -177,11 +177,11 @@ public class Financialbusinessprogram {
                             theFinance.fileSet();
                             System.out.println("THE NEW CRED LIST:");
                             theFinance.printList();
-                        }
-                        case 3-> {
+                        break;
+                        case 3:
 
                             break;
-                        }
+
                     }
                     break;
                 case 3:
