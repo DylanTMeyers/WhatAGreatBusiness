@@ -5,91 +5,279 @@ import java.util.Date;
 
 public class TIMEGOD {
 
-    private String payday;//the day you pay your employees
-    private String payed;//option to say if you paid them or not
 
-    private TIMEGOD[] year;//an array to store data when it's not leap year
-    private TIMEGOD[] leapYear;//an array to store data when it's a leap year
+    /**
+     * these variables down below needs to be kept track of
+     * inside of a text file when it's saved
+     * there is a method for it
+     */
+    private report[] year;//an array to store data when it's not leap year
+    private report[] leapYear;//an array to store data when it's a leap year
     private boolean normalYear;//boolean to say if leap year or not
-
-    //today's date
-    private int date[];
-
-    private double sales;//today's sales
-    private double profit;//today's profit
-    private double cost;//today's cost
-
-    //these are the days of the month to keep track of
-    //                   1  2  3  4  5  6  7  8  9 10 11 12
-    int calender[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
-    //                       1  2  3  4  5  6  7  8  9 10 11 12
-    int calenderLeap[] = {0,31,29,31,30,31,30,31,31,30,31,30,31};
+    private int theDay; // the number of the assumed today day
 
     TIMEGOD() {
-        this.sales = 0;
-        this.profit = 0;
-        this.cost = 0;
 
-        this.year = new TIMEGOD[365];
-        this.leapYear = new TIMEGOD[366];
-
-        this.payday = "thursday";
+        this.year = new report[365];
+        this.leapYear = new report[366];
+        this.theDay = 0;
 
     }//end of timegod constructor
 
+    /**
+     * this grabs the current date by the form
+     * mm/dd/yyyy
+     * @return
+     */
+    public static String theDate(){
+        Date bill = new Date();
+        SimpleDateFormat day = new SimpleDateFormat("MM/dd/yyyy");
+        return day.format(bill);
+    }//end of date
+
+    /**
+     * this entire method is to get today's date to keep track of things
+     * it grabs all the info on today and returns a number that's the
+     * current day in the year from the array to use for the day
+     * I find an easier way to do this later, by my god isn't this code
+     * BEUTIFUL    update: i deleted it....
+     * @return
+     */
     //method to get current date
     public int today() {
-        int day = 0;
 
         Date today = new Date();//gets the date
         //formats it to mm dd yyyy
-        SimpleDateFormat today2 = new SimpleDateFormat("MM/dd/yyyy");
-        String b = today2.toString();//turns into string
-        String[] thing = b.split("[/]");//splits the string
-        for(int i = 0; i < thing.length; i++){
-            int uio = Integer.parseInt(thing[i]);//makes it into an int
-            this.date[i] = uio;//puts the int into the date array
-        }//end of for
+        SimpleDateFormat today2 = new SimpleDateFormat("D");
+        String b = today2.format(today);//turns into string
 
-        if(date[2] % 4 == 0) {//if the year is divisible by 4 it's a leap
-            this.normalYear = false;//mark it as leap
-        }//end of if
-        else{//otherwise it's normal
-            this.normalYear = true;//mark it as normal
-        }//end of else
-
-        day+= date[1];//adds the days to the day
-
-        if(this.normalYear){//if this is a normal year
-            //adds in the days till the month it's reached
-            //minus the one it's on so it doesnt add extra days
-            for(int i = 0; i < date[0]-1; i++){
-                day+= calender[i];
-            }//end of for
-        }//end of if
-        else{//if it's not a normal year
-            //adds in the days till the month it's reached
-            //minus the one it's on so it doesnt add extra days
-            for(int i = 0; i < date[0]-1; i++){
-                day+= calenderLeap[i];
-            }//end of for
-        }//end of else
-
-        return day;
+        return Integer.parseInt(b);//returns as an intiger
     }//end of today method
 
-    //method to put in today's sales, profit, cost
-    public void insert(double sales , double profit, double cost){
 
-    }//end of insert
+    /**
+     * this method returns wether it's a new day or not
+     * it does this by keeping track of the assumed today
+     * and a recount of today's date. If it's the same, it
+     * is not a new day, if it's different it's a new day
+     * this method is being used in the method below, don't worry
+     * about this
+     * @return
+     */
+    //this method will be used to see if it's a new day
+    public boolean newDay(){
+
+        int bob = today();//grabs the number of today's date
+        if(bob==theDay){//it today matches with theDay it's the same day
+            return false;
+        }
+        else{//if it doesn't match then it's a new day
+            theDay = bob;//makes this the new day
+            return true;
+        }
+
+    }//end of newDay
+
+    /**
+     * checks to see if this an empty day or not
+     * @param bob
+     * @return
+     */
+    //method to see if there is no report in that day
+    //don't worry about this method
+    private boolean empty(int bob){
+        if(this.year[bob] == null){//checks this day if it's null
+            return true;//it is empty
+        }
+        else{//if it's not empty there is a report
+            return false;
+        }
+    }
+
+    /**
+     * call this method first to make a report for the day
+     * another method will be used to add on every sale
+     * if it's not a newday, nothing will happen don't worry
+     * this may happen in case someone re opens this program
+     */
+    //method to put in today's sales, profit, cost
+    public void write(){
+        if(newDay()) {//if it's a new day
+            int bob = today();//grabs the today's date
+
+            report tom = new report();//make a report for today
+
+            this.year[bob] = tom;//put it in the record
+
+            theDay = bob;//make today the new day
+        }
+        else{//it it's the same day, don't do anything
+            System.out.println();
+        }
+    }//end of write
+
+    /**
+     * this method will be used to make additional changes
+     * to the report, add this method below every time you
+     * sell something
+     * the parameters are the number of things u sold
+     * and the amount of money you made from it
+     */
+    public void changes(double profit, double sales){
+        int bob = today();
+        this.year[bob].sell(profit,sales);
+    }
+
+    /**
+     * this method will be used when you buy something
+     * it kepps track of the total cost of how much you spend
+     * that day to buy a product, use this when you purchase
+     * a new product like during a reup
+     */
+    public void buys(double cost){
+        int bob = today();
+        this.year[bob].bought(cost);
+    }//end of buys
+
+    /**
+     * this method is to show today's report
+     * it shows sales profits and cost of that day
+     */
+    //method to show today's stats
+    public void todayReport(){
+
+        int bob = today();//gets the date
+
+        //gets all the cost sales and profit for the day
+        double cost = this.year[bob].getCost();
+        double sales = this.year[bob].getSales();
+        double profit = this.year[bob].getProfit();
+
+        System.out.println(" ");
+        System.out.println(" Sales UwU: " + sales);
+        System.out.println(" Profits UwU: " + profit);
+        System.out.println(" Cost UwU: " +cost);
+        System.out.println(" ");
+
+    }//end of todayReport
+
+    /**
+     * this is a method that grabs the day report of whatever day
+     * it is being told to do, if there is not report it says that
+     * nothing happend that day
+     * @param bob
+     */
+    //method to show a day's report
+    private void thatDayReport(int bob){
+        if(!empty(bob)) {
+            double cost = this.year[bob].getCost();
+            double sales = this.year[bob].getSales();
+            double profit = this.year[bob].getProfit();
+            String date = this.year[bob].getDate();
+
+            System.out.println(" ");
+            System.out.println(" Date: " +  date);
+            System.out.println(" Sales UwU: " + sales);
+            System.out.println(" Profits UwU: " + profit);
+            System.out.println(" Cost UwU: " + cost);
+            System.out.println(" ");
+        }
+        else{
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println(" ");
+        }
+
+    }//end of thatDayReport
 
     //method to show year's stats
 
+    /**
+     * this gets the month reports by grabbing the day of the month
+     * and then looping up to it and printing everything
+     */
     //method to show months stats
+    public void monthReport(){
+        Date date = new Date();//grabs the date
+        SimpleDateFormat day = new SimpleDateFormat("d");
+        String bob = day.format(date);//gets the day in the month
+        int tom = Integer.parseInt(bob);//puts it into a number
 
+        int today = today();//todays number in year
+
+        for(int i = 0; i < tom; i++){
+            thatDayReport((today-tom)+i);
+        }//end of for
+
+    }//end of monthReport
+
+    /**
+     * this method prints out the current week's records
+     * this is done by seeing what day it is and gathers the data
+     * of it, if there is no data, it shows happy faces
+     */
     //method to show week's stats
+    public void weekReport(){
+        Date date = new Date();//grabs the date
+        //formats it to see what day of the week it is
+        SimpleDateFormat day = new SimpleDateFormat("E");
+        String bob = day.format(date);//gets the day
 
-    //method to show today's stats
+        System.out.println(" ");
+        System.out.println("  here is the current week's report uwu");
+        System.out.println(" ");
+
+        int tom = today();//the day of the current year
+
+        //to see what day it is
+        switch(bob){
+            case "Mon":
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Tue":
+                thatDayReport(tom-2);
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Wed":
+                thatDayReport(tom-3);
+                thatDayReport(tom-2);
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Thu":
+                thatDayReport(tom-4);
+                thatDayReport(tom-3);
+                thatDayReport(tom-2);
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Fri":
+                thatDayReport(tom-5);
+                thatDayReport(tom-4);
+                thatDayReport(tom-3);
+                thatDayReport(tom-2);
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Sat":
+                thatDayReport(tom-6);
+                thatDayReport(tom-5);
+                thatDayReport(tom-4);
+                thatDayReport(tom-4);
+                thatDayReport(tom-3);
+                thatDayReport(tom-2);
+                thatDayReport(tom-1);
+                thatDayReport(tom);
+                break;
+            case "Sun":
+                thatDayReport(tom);
+                break;
+        }//end of switch
+
+
+    }//end of weekReport
 
 
 
