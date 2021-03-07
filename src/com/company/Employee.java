@@ -13,7 +13,7 @@ public class Employee{
 
 
 	// constructor
-	public Employee{
+	public Employee(String name, double hoursWorked, double hourlyPay, String status){
 		this.name = name;
 		this.hoursWorked = hoursWorked;
 		this.hourlyPay = hourlyPay;

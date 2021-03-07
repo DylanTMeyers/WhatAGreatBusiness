@@ -17,16 +17,6 @@ public class Product {
         this.productName = productName;
         this.productAmount = productAmount;
     }
-    Product(String productName, double productAmount, String productInvestor) throws IOException {
-        this.productName = productName;
-        this.productAmount = productAmount;
-        this.productInvestor = productInvestor;
-        hasAInvestor = true;
-        PrintWriter out;
-        out = new PrintWriter(new FileWriter("investorsBusinessProduct.txt"));
-        this.out = out;
-    }
-
     public String toString(){
         if(hasAInvestor){
             return productName + "   " + productAmount + "   " + productInvestor;
