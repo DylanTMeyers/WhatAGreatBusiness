@@ -88,7 +88,7 @@ public class TIMEGOD {
     private boolean empty(int bob){
         if(this.year[bob] == null){//checks this day if it's null
             return true;//it is empty
-        }//end of if 
+        }//end of if
         else{//if it's not empty there is a report
             return false;
         }//end of else
@@ -96,38 +96,26 @@ public class TIMEGOD {
 
     /**
      * call this method first to make a report for the day
-     * another method will be used to add on every sale
+     * will be used to add on every sale to keep track
      * if it's not a newday, no new report will be made
      * and then the record will be kept track of
      * this may happen in case someone re opens this program
      */
     //method to put in today's sales, profit, cost
     public void write(double profit, double sales){
+        int bob = today();//grabs the today's date
         if(newDay()) {//if it's a new day
-            int bob = today();//grabs the today's date
-
             report tom = new report();//make a report for today
 
             this.year[bob] = tom;//put it in the record
 
             theDay = bob;//make today the new day
-            changes(profit, sales);
+            this.year[bob].sell(profit,sales);
         }//end of if
         else{//it it's the same day, don't do anything just
-            changes(profit,sales);//keep track of sale/profit on day
+            this.year[bob].sell(profit,sales);//keep track of sale/profit on day
         }//end of else
     }//end of write
-
-    /**
-     * this method will be used to make additional changes
-     * to the report, it is in the write method
-     * the parameters are the number of things u sold
-     * and the amount of money you made from it
-     */
-    private void changes(double profit, double sales){
-        int bob = today();
-        this.year[bob].sell(profit,sales);
-    }//end of changes
 
     /**
      * this method will be used when you buy something
