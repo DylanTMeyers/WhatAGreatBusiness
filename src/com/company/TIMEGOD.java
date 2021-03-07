@@ -88,16 +88,17 @@ public class TIMEGOD {
     private boolean empty(int bob){
         if(this.year[bob] == null){//checks this day if it's null
             return true;//it is empty
-        }
+        }//end of if 
         else{//if it's not empty there is a report
             return false;
-        }
-    }
+        }//end of else
+    }//end of empty
 
     /**
      * call this method first to make a report for the day
      * another method will be used to add on every sale
-     * if it's not a newday, nothing will happen don't worry
+     * if it's not a newday, no new report will be made
+     * and then the record will be kept track of
      * this may happen in case someone re opens this program
      */
     //method to put in today's sales, profit, cost
@@ -111,23 +112,22 @@ public class TIMEGOD {
 
             theDay = bob;//make today the new day
             changes(profit, sales);
-        }
-        else{//it it's the same day, don't do anything
-            changes(profit,sales);
-        }
+        }//end of if
+        else{//it it's the same day, don't do anything just
+            changes(profit,sales);//keep track of sale/profit on day
+        }//end of else
     }//end of write
 
     /**
      * this method will be used to make additional changes
-     * to the report, add this method below every time you
-     * sell something
+     * to the report, it is in the write method
      * the parameters are the number of things u sold
      * and the amount of money you made from it
      */
     private void changes(double profit, double sales){
         int bob = today();
         this.year[bob].sell(profit,sales);
-    }
+    }//end of changes
 
     /**
      * this method will be used when you buy something
@@ -135,9 +135,18 @@ public class TIMEGOD {
      * that day to buy a product, use this when you purchase
      * a new product like during a reup
      */
-    public void buys(double cost){
-        int bob = today();
-        this.year[bob].bought(cost);
+    public void write(double cost){
+        int bob = today();//grabs today num in year
+        if(newDay()) {//sees if it's a new day if so
+            report tom = new report();//makes a report for the day
+            this.year[bob] = tom;//places it in the record
+            theDay = bob;//makes this the new day
+
+            this.year[bob].bought(cost);//increases cost in this day
+        }//end of if
+        else{//if it's not
+            this.year[bob].bought(cost);//increases cost in this day
+        }//end of else
     }//end of buys
 
     /**
