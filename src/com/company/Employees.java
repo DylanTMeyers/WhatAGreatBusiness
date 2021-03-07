@@ -6,8 +6,7 @@ import java.util.Hashtable;
 public class Employees{
     int count;
     private static Employees employees;
-    Hashtable<Integer, String> track = new Hashtable<>();
-    ArrayList<String> bob = new ArrayList<>();
+    Hashtable<String, Employee> track = new Hashtable<>();
 
     public static synchronized Employees getInstance(){
         if(employees == null){
@@ -15,9 +14,8 @@ public class Employees{
         }
         return employees;
     }
-    public void add(int a, String b){
+    public void add(String a, Employee b){
         track.put(a, b);
-        bob.add(b + " " + a);
         count++;
     }
 
@@ -31,15 +29,7 @@ public class Employees{
         count--;
     }
 
-    public String getemployee(String a){
-        for (String s : bob) {
-            String suad = s.substring(s.length() - 1);
-            int b = Integer.parseInt(suad);
-            track.get(b);
-            if (track.get(b).equals(a)) {
-                return track.get(b);
-            }//end of if
-        }//end of for
-        return "Nothing found";
+    public Employee getemployee(String a){
+        return track.get(a);
     }//end of method
 }
