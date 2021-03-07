@@ -155,8 +155,8 @@ public class TIMEGOD {
         System.out.println(" ");
         System.out.println(" Date: " +  date);
         System.out.println(" Sales UwU: " + sales);
-        System.out.println(" Profits UwU: " + profit);
-        System.out.println(" Cost UwU: " +cost);
+        System.out.println(" Profits UwU: $" + profit);
+        System.out.println(" Cost UwU: $" +cost);
         System.out.println(" ");
 
     }//end of todayReport
@@ -178,8 +178,8 @@ public class TIMEGOD {
             System.out.println(" ");
             System.out.println(" Date: " +  date);
             System.out.println(" Sales UwU: " + sales);
-            System.out.println(" Profits UwU: " + profit);
-            System.out.println(" Cost UwU: " + cost);
+            System.out.println(" Profits UwU: $" + profit);
+            System.out.println(" Cost UwU: $" + cost);
             System.out.println(" ");
         }
         else{
@@ -201,12 +201,12 @@ public class TIMEGOD {
                 System.out.println(" ");
                 System.out.println(" Date: " + this.year[i].getDate());
                 System.out.println(" Sales: " + this.year[i].getSales());
-                System.out.println(" Profit: " + this.year[i].getProfit());
-                System.out.println(" Cost: " + this.year[i].getCost());
+                System.out.println(" Profit: $" + this.year[i].getProfit());
+                System.out.println(" Cost: $" + this.year[i].getCost());
                 System.out.println(" ");
             }
             catch(NullPointerException e){
-                System.out.println(" ");
+                System.out.println(" Date: " + today());
                 System.out.println(" nothing done today, moving on");
                 System.out.println(" ");
             }
