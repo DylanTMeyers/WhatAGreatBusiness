@@ -20,7 +20,7 @@ public class Financialbusinessprogram {
         int productOptions;
         int employeeOptions;
         int statsOptions;
-
+        TIMEGOD timegod = new TIMEGOD();
         String[] reupProduct;
 
         boolean reupProductExist;
@@ -457,15 +457,15 @@ public class Financialbusinessprogram {
                     }
                     switch (statsOptions) {
                         case 1:
-
+                        timegod.todayReport();
 
                             break;
                         case 2:
-
+                        timegod.weekReport();
 
                             break;
                         case 3:
-
+                        timegod.monthReport();
 
                             break;
                         case 4:
