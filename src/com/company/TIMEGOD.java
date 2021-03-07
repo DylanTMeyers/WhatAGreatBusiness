@@ -150,8 +150,10 @@ public class TIMEGOD {
         double cost = this.year[bob].getCost();
         double sales = this.year[bob].getSales();
         double profit = this.year[bob].getProfit();
+        String date = this.year[bob].getDate();
 
         System.out.println(" ");
+        System.out.println(" Date: " +  date);
         System.out.println(" Sales UwU: " + sales);
         System.out.println(" Profits UwU: " + profit);
         System.out.println(" Cost UwU: " +cost);
@@ -182,7 +184,7 @@ public class TIMEGOD {
         }
         else{
             System.out.println(" ");
-            System.out.println(" ");
+            System.out.println(" nothing was done this day");
             System.out.println(" ");
         }
 
@@ -193,6 +195,17 @@ public class TIMEGOD {
      * prints out the entire year
      */
     //method to show year's stats
+    public void yearReport(){
+        for(int i = 0 ; i < 365; i++){
+            System.out.println(" ");
+            System.out.println(" Date: " + this.year[i].getDate());
+            System.out.println(" Sales: " + this.year[i].getSales());
+            System.out.println(" Profit: " + this.year[i].getProfit());
+            System.out.println(" Cost: " + this.year[i].getCost());
+            System.out.println(" ");
+        }//end of for
+    }//end of yearReport
+
 
     /**
      * this gets the month reports by grabbing the day of the month
