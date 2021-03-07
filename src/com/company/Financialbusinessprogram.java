@@ -21,6 +21,7 @@ public class Financialbusinessprogram {
         int employeeOptions;
         int statsOptions;
         TIMEGOD timegod = new TIMEGOD();
+        timegod.readAll();
         String[] reupProduct;
 
         boolean reupProductExist;
@@ -221,6 +222,7 @@ public class Financialbusinessprogram {
                                 double prodPrice = Double.parseDouble(stdn.nextLine());
                                 theFinance.tranReup(productName, productAmount, prodPrice);
                                 timegod.write(prodPrice);
+                                timegod.writeAll();
                                 double updatedProfit = Double.parseDouble(productsOnFile.get(productsOnFile.size() - 1)) - prodPrice;
                                 productsOnFile.set(productsOnFile.size() - 1, Double.toString(updatedProfit));
                                 for (int i = 0; productsOnFile.size() > i; i++) {
@@ -280,6 +282,7 @@ public class Financialbusinessprogram {
                                 price = Double.parseDouble(stdn.nextLine());
                                 theFinance.transaction(name, subNumber, price);
                                 timegod.write(subNumber,price);
+                                timegod.writeAll();
                                 for (int I = 0; I < productsOnFile.size(); I++) {
                                     StringArray = productsOnFile.get(I).split("   ");
                                     if (name.toUpperCase().equals(StringArray[0].toUpperCase())) {

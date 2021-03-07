@@ -1,6 +1,12 @@
 package com.company;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 
 public class TIMEGOD {
@@ -11,6 +17,7 @@ public class TIMEGOD {
      * inside of a text file when it's saved
      * there is a method for it
      */
+    private ArrayList<String> TimeIsAll = new ArrayList<>(10);
     private report[] year;//an array to store data when it's not leap year
     private report[] leapYear;//an array to store data when it's a leap year
     private boolean normalYear;//boolean to say if leap year or not
@@ -94,6 +101,37 @@ public class TIMEGOD {
         }//end of else
     }//end of empty
 
+
+
+
+     //Just takes all lines from file
+    public void readAll() throws FileNotFoundException {
+        File time = new File("TimeGod.txt");
+        Scanner Time = new Scanner(time);
+        while(Time.hasNextLine()){
+            String[] product = Time.nextLine().split(" ");
+            if(product[0].equals("Sold")) {
+                this.write(Double.parseDouble(product[1]), Double.parseDouble(product[5]));
+            }
+            else if(product[0].equals("Bought")){
+                this.write(Double.parseDouble(product[2]));
+            }
+        }
+    }
+
+
+    //Just takes all lines from Array List and writes it to file.
+    public void writeAll() throws IOException {
+        FileWriter myWriter = new FileWriter("TimeGod.txt");
+            for(String timegod:TimeIsAll)
+            try {
+                myWriter.write(timegod+"\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        myWriter.close();
+    }
     /**
      * call this method first to make a report for the day
      * will be used to add on every sale to keep track
@@ -104,6 +142,7 @@ public class TIMEGOD {
     //method to put in today's sales, profit, cost
     public void write(double profit, double sales){
         int bob = today();//grabs the today's date
+        TimeIsAll.add("Sold " + sales + " units for $ " + profit); // Loads into Array List for saving later
         if(newDay()) {//if it's a new day
             report tom = new report();//make a report for today
 
@@ -125,6 +164,7 @@ public class TIMEGOD {
      */
     public void write(double cost){
         int bob = today();//grabs today num in year
+        TimeIsAll.add("Bought $ " +  cost +" worth of product");  // Loads into Array List for saving later
         if(newDay()) {//sees if it's a new day if so
             report tom = new report();//makes a report for the day
             this.year[bob] = tom;//places it in the record
@@ -197,8 +237,7 @@ public class TIMEGOD {
     public void yearReport(){
         for(int i = 0 ; i < 365; i++){
             try {
-                System.out.println(" ");
-                System.out.println(" Date: " + this.year[i].getDate());
+                System.out.println("\n Date: " + this.year[i].getDate());
                 System.out.println(" Sales: " + this.year[i].getSales());
                 System.out.println(" Profit: $" + this.year[i].getProfit());
                 System.out.println(" Cost: $" + this.year[i].getCost());

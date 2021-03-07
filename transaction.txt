@@ -2,3 +2,9 @@ Bought 34.0 of blue pants for $4000.0
 Bought 120.0 of glass for $400.0
 Bought 23.0 of Glass for $200.0
 Bought 42.0 of bottle for $1000.0
+Bought 24.0 orders of Water Melons for $1000.0
+Bought 23.0 orders of Pop Corn for $200.0
+Bought 43.0 orders of Water for $1202.0
+Bought 15.0 orders of Spay for $150.0
+Sold 10.0 orders of Computer for $1000.0
+Sold 10.0 orders of Computer for $1000.0
