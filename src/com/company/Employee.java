@@ -17,16 +17,22 @@ public class Employee{
 	private String position;
 	private double totalincome;
 	private double monthlyIncome; // not used yet
+	private FileWriter myWriter;
 
-	public Employee(int ID, String name, double hoursWorked, double hourlyPay, String status, String position, double totalincome){
+
+	public Employee(int ID, String name, double hoursWorked, double hourlyPay, String status, String position ){
 		this.ID = ID;
 		this.name = name;
 		this.hoursWorked = hoursWorked; 
 		this.hourlyPay = hourlyPay;
 		this.status = status; 
 		this.position = position;
-		this.totalincome = totalincome;
+		this.totalincome = hourlyPay * hoursWorked;
 	}
+	public String getName(){
+		return name;
+	}
+
 	public int getID(){
 		return ID;
 	}
@@ -58,23 +64,20 @@ public class Employee{
 		this.position = position;
 	}
 	public String toString(){
-		return ID + " " + name + " " + hoursWorked + " " + hourlyPay + " " + status + " " + position;
+		return "ID: " + ID + "\nName: " + name + "\nHours Worked: " + hoursWorked + "\nHourly Pay: " + hourlyPay + "\nStatus: " + status + " \nPosition: " + position;
 	}
 	public void printToFile(){
 		// put data in a text file
-		try {
-		      FileWriter myWriter = new FileWriter("file.txt");	
-		      myWriter.write("hi");
-		}
-		catch(IOException e){
-			System.out.println("Error: file could not be written to.");
-			System.exit(-1);
-		}
+
 	}
 	public double getTotalincome(){
 		return totalincome;
 	}
 	public void setTotalincome(double a){
 		this.totalincome = a;
+	}
+	public void addHoursWorked(int hours){
+		hoursWorked= hours + hoursWorked;
+
 	}
 }
