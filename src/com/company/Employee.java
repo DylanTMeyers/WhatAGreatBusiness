@@ -56,7 +56,7 @@ public class Employee{
 		this.position = position;
 	}
 	public String toString(){
-		return ID + " " name + " " + hoursWorked + " " + hourlyPay + " " + status + " " + position;
+		return ID + " " + name + " " + hoursWorked + " " + hourlyPay + " " + status + " " + position;
 	}
 	public void printToFile(){
 		// put data in a text file
