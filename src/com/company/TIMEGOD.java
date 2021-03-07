@@ -169,6 +169,7 @@ public class TIMEGOD {
      */
     //method to show a day's report
     private void thatDayReport(int bob){
+
         if(!empty(bob)) {
             double cost = this.year[bob].getCost();
             double sales = this.year[bob].getSales();
@@ -183,9 +184,7 @@ public class TIMEGOD {
             System.out.println(" ");
         }
         else{
-            System.out.println("  ");
-            System.out.println(" nothing was done this day");
-            System.out.println(" ");
+            System.out.print("");
         }
 
     }//end of thatDayReport
@@ -206,9 +205,7 @@ public class TIMEGOD {
                 System.out.println(" ");
             }
             catch(NullPointerException e){
-                System.out.println(" Date: " + today());
-                System.out.println(" nothing done today, moving on");
-                System.out.println(" ");
+                System.out.print("");
             }
         }//end of for
     }//end of yearReport
