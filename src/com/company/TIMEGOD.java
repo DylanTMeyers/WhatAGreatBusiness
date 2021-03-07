@@ -101,7 +101,7 @@ public class TIMEGOD {
      * this may happen in case someone re opens this program
      */
     //method to put in today's sales, profit, cost
-    public void write(){
+    public void write(double profit, double sales){
         if(newDay()) {//if it's a new day
             int bob = today();//grabs the today's date
 
@@ -110,9 +110,10 @@ public class TIMEGOD {
             this.year[bob] = tom;//put it in the record
 
             theDay = bob;//make today the new day
+            changes(profit, sales);
         }
         else{//it it's the same day, don't do anything
-            System.out.println();
+            changes(profit,sales);
         }
     }//end of write
 
@@ -123,7 +124,7 @@ public class TIMEGOD {
      * the parameters are the number of things u sold
      * and the amount of money you made from it
      */
-    public void changes(double profit, double sales){
+    private void changes(double profit, double sales){
         int bob = today();
         this.year[bob].sell(profit,sales);
     }
@@ -190,6 +191,10 @@ public class TIMEGOD {
 
     }//end of thatDayReport
 
+    /**
+     * this method gets the year report, to do this, it simply
+     * prints out the entire year
+     */
     //method to show year's stats
 
     /**
